@@ -16,14 +16,14 @@ int main() {
 
 	ColorGrid grid(20, 20, 20);
 
-        VisualizationSettings settings(800, 600, 40, "../assets/Hack-Bold.ttf", 20);
+        VisualizationSettings settings(800, 600, 40, "../assets/fonts/Hack-Bold.ttf", 20);
         NetworkVisualization visualization(settings);
 
 	trainingStrategy.setScalingFunction(&sigmoid);
         network.setTrainingStrategy(&trainingStrategy);
 
-	grid.initialize();
 	visualization.visualize(&network);
+	grid.initialize();
 
 	while (visualization.isOpen() && grid.isOpen()) {
 		visualization.draw();
