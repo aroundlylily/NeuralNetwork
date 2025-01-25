@@ -2,7 +2,6 @@
 #define NETWORKVISUALIZATION_HPP
 
 #include <SFML/Graphics.hpp>
-#include <iomanip>
 
 class NeuronLayer;
 class NeuralNetwork;
@@ -32,6 +31,7 @@ private:
 	const VisualizationSettings settings_;
 	NeuralNetwork *network_;
 	sf::RenderWindow window_;
+        bool windowActive_;
 	sf::Event event_;
 	std::vector<NeuronRender *> neurons_;
 	std::vector<WeightRender *> weights_;
@@ -58,7 +58,6 @@ private:
 
 public:
 	bool isOpen();
-	void updateWindow();
         void draw();
 };
 

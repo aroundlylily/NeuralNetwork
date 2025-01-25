@@ -22,6 +22,7 @@ public:
         void setTrainingStrategy(TrainingStrategy *trainingStrategy);
         bool hasCompletedTraining() const;
         void train(const std::vector<std::vector<double>> &inputs, const std::vector<std::vector<double>> &outputs);
+        void reset();
         double error() const;
 	void print() const;
 };

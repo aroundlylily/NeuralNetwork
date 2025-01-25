@@ -41,7 +41,7 @@ public:
 	void backPropagate(const std::vector<NeuronLayer *> &layers, int layerIndex);
 	bool hasCompleted(int iteration);
 	double train(const NeuralNetwork *network, int iteration, const std::vector<std::vector<double>> &inputs, const std::vector<std::vector<double>> &outputs);
-	std::vector<double> run(const NeuralNetwork *network, const std::vector<double> inputs);
+	std::vector<double> apply(const NeuralNetwork *network, const std::vector<double> inputs);
 };
 
 #endif

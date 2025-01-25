@@ -1,6 +1,5 @@
-#include "../../include/render/TextRender.hpp"
-#include "../../include/training/TrainingStrategy.hpp"
-#include "../../include/render/NetworkVisualization.hpp"
+#include "TextRender.hpp"
+#include "render/NetworkVisualization.hpp"
 
 TextRender::TextRender(const VisualizationSettings &settings, const std::string &label, sf::Vector2f position)
 : label_(label) 

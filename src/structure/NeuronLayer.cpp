@@ -1,4 +1,7 @@
-#include "../../include/structure/NeuronLayer.hpp"
+#include "NeuronLayer.hpp"
+
+#include <string>
+#include <iostream>
 
 NeuronLayer::NeuronLayer(int layerSize, int nextLayerSize)
 	: values_(layerSize, 1), errors_(layerSize, 0), weights_(layerSize * nextLayerSize, 0), nextLayerSize_(nextLayerSize) {}
@@ -31,3 +34,4 @@ void NeuronLayer::print() {
 	}
 	std::cout << "Values: { " << values << " }\n\nErrors: { " << errors << " }\n\nWeights:\n" << weights << "\n";
 }
+

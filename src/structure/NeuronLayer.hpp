@@ -2,8 +2,6 @@
 #define NEURONLAYER_HPP
 
 #include <vector>
-#include <string>
-#include <iostream>
 
 class NeuronLayer {
 private:

@@ -1,5 +1,9 @@
-#include "../../include/NetworkStructure.hpp"
-#include "../../include/training/TrainingStrategy.hpp"
+#include "NeuralNetwork.hpp"
+#include "NeuronLayer.hpp"
+
+#include "training/TrainingStrategy.hpp"
+
+#include <iostream>
 
 NeuralNetwork::NeuralNetwork(const std::vector<int> &dimensions) 
 	: dimensions_(dimensions), trainingStrategy_(nullptr), iterations_(0), error_(0.f)
@@ -46,6 +50,10 @@ void NeuralNetwork::train(const std::vector<std::vector<double>> &inputs, const 
         if (!trainingStrategy_)
                 return;
         error_ = trainingStrategy_->train(this, iterations_++, inputs, outputs);
+}
+
+void NeuralNetwork::reset() {
+        iterations_ = 0;
 }
 
 double NeuralNetwork::error() const {

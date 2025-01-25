@@ -1,5 +1,5 @@
-#include "../../include/render/WeightRender.hpp"
-#include "../../include/render/NetworkVisualization.hpp"
+#include "WeightRender.hpp"
+#include "render/NetworkVisualization.hpp"
 
 WeightRender::WeightRender(const VisualizationSettings &settings, sf::Vector2f start, sf::Vector2f end)
 	: line_(sf::VertexArray(sf::Lines, 2))

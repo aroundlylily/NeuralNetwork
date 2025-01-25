@@ -1,5 +1,7 @@
-#include "../../include/render/NeuronRender.hpp"
-#include "../../include/render/NetworkVisualization.hpp"
+#include "NeuronRender.hpp"
+#include "render/NetworkVisualization.hpp"
+
+#include <iomanip>
 
 NeuronRender::NeuronRender(const VisualizationSettings &settings, sf::Vector2f position, sf::Color color) {
         font_.loadFromFile(settings.fontFile);

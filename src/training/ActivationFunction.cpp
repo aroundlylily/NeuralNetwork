@@ -1,4 +1,4 @@
-#include "../../include/training/ActivationFunction.hpp"
+#include "ActivationFunction.hpp"
 
 double SigmoidFunction::apply(double value) const {
 	return 1.f / (1.f + std::exp(-value));

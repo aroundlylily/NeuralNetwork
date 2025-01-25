@@ -1,5 +1,11 @@
-#include "../../include/NetworkStructure.hpp"
-#include "../../include/NetworkVisuals.hpp"
+#include "NetworkVisualization.hpp"
+
+#include "NeuronRender.hpp"
+#include "TextRender.hpp"
+#include "WeightRender.hpp"
+
+#include "structure/NeuronLayer.hpp"
+#include "structure/NeuralNetwork.hpp"
 
 VisualizationSettings::VisualizationSettings(int windowWidth, int windowHeight, float neuronRadius, const std::string &fontFile, int characterSize)
 	: windowWidth(windowWidth), windowHeight(windowHeight), neuronRadius(neuronRadius), fontFile(fontFile), characterSize(characterSize) {}
@@ -8,7 +14,7 @@ LayerStructure::LayerStructure(int size, float position, bool hasBiasNeuron)
 	: size(size + hasBiasNeuron), position(position), hasBiasNeuron(hasBiasNeuron) {}
 
 NetworkVisualization::NetworkVisualization(const VisualizationSettings &settings)
-	: settings_(settings), network_(nullptr), window_(sf::VideoMode(settings.windowWidth, settings.windowHeight), "NeuralNetwork", sf::Style::Close) {}
+	: settings_(settings), network_(nullptr), windowActive_(false) {}
 
 NetworkVisualization::~NetworkVisualization() {
 	clear();
@@ -63,6 +69,10 @@ void NetworkVisualization::renderNetwork(const std::vector<int> &networkDimensio
 }
 
 void NetworkVisualization::visualize(NeuralNetwork *network) {
+        if (!windowActive_) {
+                windowActive_ = true;
+                window_.create(sf::VideoMode(settings_.windowWidth, settings_.windowHeight), "NeuralNetwork", sf::Style::Close);
+        }
 	clear();
 	renderNetwork(network->dimensions());
 	renderText("Total Error: ", { 0, 0 });
@@ -139,17 +149,14 @@ bool NetworkVisualization::isOpen() {
 	return window_.isOpen();
 }
 
-void NetworkVisualization::updateWindow() {
-	while (window_.pollEvent(event_)) {
-		if (event_.type == sf::Event::Closed) {
-			window_.close();
-		}
-	}
-}
-
 void NetworkVisualization::draw() {
+	while (window_.pollEvent(event_)) {
+		if (event_.type == sf::Event::Closed)
+			window_.close();
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && network_)
+                        network_->reset();
+        }
 	window_.clear();
-	updateWindow();
 	for (const auto &weight : weights_)
 		weight->draw(window_);
 	for (const auto &neuron : neurons_)

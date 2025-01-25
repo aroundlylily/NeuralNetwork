@@ -2,7 +2,6 @@
 #define COLORGRID_HPP
 
 #include <SFML/Graphics.hpp>
-#include <functional>
 
 class NeuralNetwork;
 class TrainingStrategy;
@@ -10,6 +9,7 @@ class TrainingStrategy;
 class ColorGrid {
 private:
         sf::RenderWindow window_;
+        bool windowActive_;
         int width_;
         int height_;
         float scaleFactor_;
@@ -20,7 +20,7 @@ private:
         std::vector<sf::CircleShape> markers_;
         std::vector<std::vector<double>> inputs_;
         std::vector<std::vector<double>> outputs_;
-        bool takingUserInput_;
+        bool freshGrid_;
 
 public:
         ColorGrid(int width, int height, float scaleFactor);
@@ -31,8 +31,7 @@ public:
 
 private:
 	sf::CircleShape createCircle(sf::Vector2i position, float radius, sf::Color color);
-        void addBinaryClassification();
-        void getUserInput();
+        void addBinaryClassification(bool value);
 
 public:
         void updateWindow();

@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <sstream>
-#include <iomanip>
 
 struct VisualizationSettings;
 

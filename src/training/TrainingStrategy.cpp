@@ -1,6 +1,8 @@
-#include "../../include/training/TrainingStrategy.hpp"
-#include "../../include/training/ActivationFunction.hpp"
-#include "../../include/NetworkStructure.hpp"
+#include "TrainingStrategy.hpp"
+#include "ActivationFunction.hpp"
+
+#include "structure/NeuronLayer.hpp"
+#include "structure/NeuralNetwork.hpp"
 
 TrainingStrategy::TrainingStrategy(double learningRate, const ActivationFunction &activationFunction, int epochs, double restartThreshold)
         : learningRate_(learningRate), activationFunction_(activationFunction), outputScalingFunction_(nullptr), epochs_(epochs), restartThreshold_(restartThreshold), distribution_(-1.f, 1.f), generator_(device_()) {}
@@ -53,7 +55,6 @@ void TrainingStrategy::applyActivationFunction(std::vector<double> &values, bool
 		values[valueIndex] = activationFunction_.apply(values[valueIndex]);
 }
 
-// TODO: Consider re-write
 void TrainingStrategy::forwardPropagate(const std::vector<NeuronLayer *> &layers, int layerIndex) {
 	NeuronLayer *currentLayer = layers[layerIndex], *nextLayer = layers[layerIndex + 1];
 	bool hasBiasNeuron = true;
@@ -131,7 +132,7 @@ double TrainingStrategy::train(const NeuralNetwork *network, int iteration, cons
         return error;
 }
 
-std::vector<double> TrainingStrategy::run(const NeuralNetwork *network, const std::vector<double> inputs) {
+std::vector<double> TrainingStrategy::apply(const NeuralNetwork *network, const std::vector<double> inputs) {
 	const std::vector<NeuronLayer *> &layers = network->layers();
 	setInputs(layers.front(), inputs);
 	forwardPropagate(layers, 0);
